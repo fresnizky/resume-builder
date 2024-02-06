@@ -4,13 +4,19 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:local": "concurrently \"npm run db:local\" \"next dev\"",
+    "dev:remote": "concurrently \"npm run db:remote\" \"next dev\"",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:local": "./scripts/update-env.sh local && turso dev --db-file resume-builder.db",
+    "db:remote": "./scripts/update-env.sh remote"
   },
   "dependencies": {
+    "@libsql/client": "^0.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "concurrently": "^8.2.2",
     "lucide-react": "^0.323.0",
     "next": "14.1.0",
     "react": "^18",
